@@ -40,7 +40,7 @@ namespace Kalkulator
                         }
                         else
                         {
-                            txtBoxEkranGlowny.Text = "0";
+                            ResetMainDisplay();
                         }
                     break;
                     }
@@ -48,23 +48,26 @@ namespace Kalkulator
                     {
                         operation = "";
                         txtBoxEkranMaly.ResetText();
-                        txtBoxEkranGlowny.Text = "0";
+                        ResetMainDisplay();
                     }
                     break;
                 case "btnCE":
                     {
-                        txtBoxEkranGlowny.Text = "0";
+                        ResetMainDisplay();
                     }
                     break;
                 case "btnPlusMinus":
                     {
-                        if(!txtBoxEkranGlowny.Text.Contains("-"))
+                        if (txtBoxEkranGlowny.Text != "0")
                         {
-                            txtBoxEkranGlowny.Text = "-" + txtBoxEkranGlowny.Text;
-                        }
-                        else if(txtBoxEkranGlowny.Text.Contains("-"))
-                        {
-                            txtBoxEkranGlowny.Text = txtBoxEkranGlowny.Text.Substring(1, txtBoxEkranGlowny.Text.Length - 1);
+                            if (!txtBoxEkranGlowny.Text.Contains("-"))
+                            {
+                                txtBoxEkranGlowny.Text = "-" + txtBoxEkranGlowny.Text;
+                            }
+                            else if (txtBoxEkranGlowny.Text.Contains("-"))
+                            {
+                                txtBoxEkranGlowny.Text = txtBoxEkranGlowny.Text.Substring(1, txtBoxEkranGlowny.Text.Length - 1);
+                            }
                         }
                         break;
                     }
@@ -95,91 +98,34 @@ namespace Kalkulator
                     break;
             }
         }
-
+        private void SaveOperation(string znak)
+        {
+            if (operation == "" || operation == "=")
+            {
+                operation = znak;
+                previousOperation = operation;
+                previousEquation = txtBoxEkranGlowny.Text;
+                txtBoxEkranMaly.Text = previousEquation + operation;
+                ResetMainDisplay();
+            }
+            else
+            {
+                operation = znak;
+                multiEquations();
+                txtBoxEkranMaly.Text += txtBoxEkranGlowny.Text + operation;
+                ResetMainDisplay();
+            }
+        }
         private void Operation_Click(Object Sender, EventArgs e)
         {
             Button opr = Sender as Button;
             switch (opr.Text)
             {
-                case "+":
+                default:
                     {
-                            if (operation == "" || operation == "=")
-                            {
-                                operation = "+";
-                                previousOperation = operation;
-                                previousEquation = txtBoxEkranGlowny.Text;
-                                txtBoxEkranMaly.Text = previousEquation + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
-                            else
-                            {
-                                operation = "+";
-                                multiEquations();
-                                txtBoxEkranMaly.Text += txtBoxEkranGlowny.Text + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            } 
-                        break;
-                    }
-                case "-":
-                    {
-                            if (operation == "" || operation == "=")
-                            {
-                                operation = "-";
-                                previousOperation = operation;
-                                previousEquation = txtBoxEkranGlowny.Text;
-                                txtBoxEkranMaly.Text = previousEquation + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
-                            else
-                            {
-                                operation = "-";
-                                multiEquations();
-                                txtBoxEkranMaly.Text += txtBoxEkranGlowny.Text + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
+                        SaveOperation(opr.Text);          
                     }
                     break;
-
-                case "x":
-                    {
-                            if (operation == "" || operation == "=")
-                            {
-                                operation = "x";
-                                previousOperation = operation;
-                                previousEquation = txtBoxEkranGlowny.Text;
-                                txtBoxEkranMaly.Text = previousEquation + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
-                            else
-                            {
-                                operation = "x";
-                                multiEquations();
-                                txtBoxEkranMaly.Text += txtBoxEkranGlowny.Text + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
-                        break;
-                    }
-
-                case "/":
-                    {
-                            if (operation == "" || operation == "=")
-                            {
-                                operation = "/";
-                                previousOperation = operation;
-                                previousEquation = txtBoxEkranGlowny.Text;
-                                txtBoxEkranMaly.Text = previousEquation + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
-                            else
-                            {
-                                operation = "/";
-                                multiEquations();
-                                txtBoxEkranMaly.Text += txtBoxEkranGlowny.Text + operation;
-                                txtBoxEkranGlowny.Text = "0";
-                            }
-                    }
-                    break;
-
                 case "=":
                     {
                             operation = "=";
@@ -206,47 +152,47 @@ namespace Kalkulator
                     }
             }
         }
-
         private void multiEquations()
         {
-            if (previousOperation == "+")
+            switch (previousOperation)
             {
-                previousOperation = operation;
+                case "+":
+                    {
+                        previousOperation = operation;
+                        answer = Convert.ToDouble(previousEquation) + Convert.ToDouble(txtBoxEkranGlowny.Text);
+                        previousEquation = answer.ToString();
+                    }
+                    break;
+                case "-":
+                    {
+                        previousOperation = operation;
+                        answer = Convert.ToDouble(previousEquation) - Convert.ToDouble(txtBoxEkranGlowny.Text);
+                        previousEquation = answer.ToString();
+                    }
+                    break;
+                case "x":
+                    {
+                        previousOperation = operation;
+                        answer = Convert.ToDouble(previousEquation) * Convert.ToDouble(txtBoxEkranGlowny.Text);
+                        previousEquation = answer.ToString();
+                    }
+                    break;
+                case @"/":
+                    {
+                        previousOperation = operation;
 
-                answer = Convert.ToDouble(previousEquation) + Convert.ToDouble(txtBoxEkranGlowny.Text);
+                        if (Double.Parse(txtBoxEkranGlowny.Text) == 0)
+                        {
+                            dzielPrzezZero = true;
+                        }
+                        else
+                        {
+                            answer = Convert.ToDouble(previousEquation) / Convert.ToDouble(txtBoxEkranGlowny.Text);
 
-                previousEquation = answer.ToString();
-            }
-            else if (previousOperation == "-")
-            {
-                previousOperation = operation;
-
-                answer = Convert.ToDouble(previousEquation) - Convert.ToDouble(txtBoxEkranGlowny.Text);
-
-                previousEquation = answer.ToString();
-            }
-            else if (previousOperation == @"/")
-            {
-                previousOperation = operation;
-
-                if(txtBoxEkranGlowny.Text == "0")
-                {
-                    dzielPrzezZero = true;
-                }
-                else
-                {
-                    answer = Convert.ToDouble(previousEquation) / Convert.ToDouble(txtBoxEkranGlowny.Text);
-
-                    previousEquation = answer.ToString();
-                }
-            }
-            else if (previousOperation == "x")
-            {
-                previousOperation = operation;
-
-                answer = Convert.ToDouble(previousEquation) * Convert.ToDouble(txtBoxEkranGlowny.Text);
-
-                previousEquation = answer.ToString();
+                            previousEquation = answer.ToString();
+                        }
+                    }
+                    break;
             }
         }
         private void ChangeEnabledBtn(Boolean b)
@@ -267,6 +213,10 @@ namespace Kalkulator
             }
             else
                 return false;
+        }
+        private void ResetMainDisplay()
+        {
+            txtBoxEkranGlowny.Text = "0";
         }
     }
 }
