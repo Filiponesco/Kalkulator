@@ -51,7 +51,7 @@
             this.txtBoxEkranGlowny = new System.Windows.Forms.TextBox();
             this.txtBoxEkranMaly = new System.Windows.Forms.TextBox();
             this.btnPierwiastek = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnModulo = new System.Windows.Forms.Button();
             this.btnKwadrat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -77,9 +77,9 @@
             // 
             // btnRownaSie
             // 
-            this.btnRownaSie.Location = new System.Drawing.Point(188, 276);
+            this.btnRownaSie.Location = new System.Drawing.Point(188, 228);
             this.btnRownaSie.Name = "btnRownaSie";
-            this.btnRownaSie.Size = new System.Drawing.Size(56, 42);
+            this.btnRownaSie.Size = new System.Drawing.Size(56, 90);
             this.btnRownaSie.TabIndex = 3;
             this.btnRownaSie.Text = "=";
             this.btnRownaSie.UseVisualStyleBackColor = true;
@@ -97,9 +97,9 @@
             // 
             // btnPlus
             // 
-            this.btnPlus.Location = new System.Drawing.Point(188, 228);
+            this.btnPlus.Location = new System.Drawing.Point(250, 228);
             this.btnPlus.Name = "btnPlus";
-            this.btnPlus.Size = new System.Drawing.Size(56, 42);
+            this.btnPlus.Size = new System.Drawing.Size(56, 90);
             this.btnPlus.TabIndex = 7;
             this.btnPlus.Text = "+";
             this.btnPlus.UseVisualStyleBackColor = true;
@@ -289,15 +289,15 @@
             this.btnPierwiastek.UseVisualStyleBackColor = true;
             this.btnPierwiastek.Click += new System.EventHandler(this.AllBtnClick);
             // 
-            // button1
+            // btnModulo
             // 
-            this.button1.Location = new System.Drawing.Point(250, 132);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(56, 42);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Mod";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Operation_Click);
+            this.btnModulo.Location = new System.Drawing.Point(250, 132);
+            this.btnModulo.Name = "btnModulo";
+            this.btnModulo.Size = new System.Drawing.Size(56, 42);
+            this.btnModulo.TabIndex = 23;
+            this.btnModulo.Text = "Mod";
+            this.btnModulo.UseVisualStyleBackColor = true;
+            this.btnModulo.Click += new System.EventHandler(this.Operation_Click);
             // 
             // btnKwadrat
             // 
@@ -316,7 +316,7 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(321, 323);
             this.Controls.Add(this.btnKwadrat);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnModulo);
             this.Controls.Add(this.btnPierwiastek);
             this.Controls.Add(this.txtBoxEkranMaly);
             this.Controls.Add(this.txtBoxEkranGlowny);
@@ -342,7 +342,7 @@
             this.Controls.Add(this.btnPlusMinus);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Kalkulator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,7 +373,7 @@
         private System.Windows.Forms.TextBox txtBoxEkranGlowny;
         private System.Windows.Forms.TextBox txtBoxEkranMaly;
         private System.Windows.Forms.Button btnPierwiastek;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnModulo;
         private System.Windows.Forms.Button btnKwadrat;
     }
 }

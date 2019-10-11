@@ -24,6 +24,7 @@ namespace Kalkulator
 
         public Boolean dzielPrzezZero = false;
         public Boolean moduloPrzezZero = false;
+        public Boolean wrongSqrt = false;
 
 
         private void AllBtnClick(object sender, EventArgs e)
@@ -75,11 +76,17 @@ namespace Kalkulator
                     }
                 case "btnPierwiastek":
                     {
-                        if (txtBoxEkranGlowny.Text != "0")
+                        if (Double.Parse(txtBoxEkranGlowny.Text) > 0)
                         {
                                 double wynik = Double.Parse(txtBoxEkranGlowny.Text);
                                 wynik = Math.Sqrt(wynik);
                                 txtBoxEkranGlowny.Text = wynik.ToString();
+                        }
+                        else
+                        {
+                            wrongSqrt = true;
+                            txtBoxEkranGlowny.Text = "Błędne dane";
+                            ChangeEnabledBtn(false);
                         }
                         break;
                     }
@@ -103,8 +110,9 @@ namespace Kalkulator
                     }
                 default:
                     {
-                        if(operation == "=") //rozpoczecie nowego liczenia
+                        if(operation == "=" || wrongSqrt) //rozpoczecie nowego liczenia
                         {
+                            wrongSqrt = false;
                             operation = "";
                             txtBoxEkranGlowny.Text = btn.Text;
                         }
@@ -153,7 +161,7 @@ namespace Kalkulator
                             operation = "=";
                             multiEquations();
                             txtBoxEkranMaly.ResetText();
-                            if (!dzielPrzezZero && !moduloPrzezZero)
+                            if (!dzielPrzezZero && !moduloPrzezZero && !wrongSqrt)
                             {
                                 if(!IsMaxLength(answer.ToString()))
                                 {
@@ -247,6 +255,9 @@ namespace Kalkulator
             btnPrzecinek.Enabled = b;
             btnPlusMinus.Enabled = b;
             btnDelete.Enabled = b;
+            btnPierwiastek.Enabled = b;
+            btnModulo.Enabled = b;
+            btnKwadrat.Enabled = b;
         }
         private bool IsMaxLength(String s)
         {
