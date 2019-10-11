@@ -50,6 +50,9 @@
             this.btnCE = new System.Windows.Forms.Button();
             this.txtBoxEkranGlowny = new System.Windows.Forms.TextBox();
             this.txtBoxEkranMaly = new System.Windows.Forms.TextBox();
+            this.btnPierwiastek = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnKwadrat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnPlusMinus
@@ -258,7 +261,7 @@
             this.txtBoxEkranGlowny.Location = new System.Drawing.Point(4, 40);
             this.txtBoxEkranGlowny.Name = "txtBoxEkranGlowny";
             this.txtBoxEkranGlowny.ReadOnly = true;
-            this.txtBoxEkranGlowny.Size = new System.Drawing.Size(240, 38);
+            this.txtBoxEkranGlowny.Size = new System.Drawing.Size(305, 38);
             this.txtBoxEkranGlowny.TabIndex = 20;
             this.txtBoxEkranGlowny.TabStop = false;
             this.txtBoxEkranGlowny.Text = "0";
@@ -271,17 +274,50 @@
             this.txtBoxEkranMaly.Location = new System.Drawing.Point(4, 10);
             this.txtBoxEkranMaly.Name = "txtBoxEkranMaly";
             this.txtBoxEkranMaly.ReadOnly = true;
-            this.txtBoxEkranMaly.Size = new System.Drawing.Size(240, 24);
+            this.txtBoxEkranMaly.Size = new System.Drawing.Size(305, 24);
             this.txtBoxEkranMaly.TabIndex = 21;
             this.txtBoxEkranMaly.TabStop = false;
             this.txtBoxEkranMaly.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnPierwiastek
+            // 
+            this.btnPierwiastek.Location = new System.Drawing.Point(250, 84);
+            this.btnPierwiastek.Name = "btnPierwiastek";
+            this.btnPierwiastek.Size = new System.Drawing.Size(56, 42);
+            this.btnPierwiastek.TabIndex = 22;
+            this.btnPierwiastek.Text = "Sqrt";
+            this.btnPierwiastek.UseVisualStyleBackColor = true;
+            this.btnPierwiastek.Click += new System.EventHandler(this.AllBtnClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(250, 132);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 42);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Mod";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Operation_Click);
+            // 
+            // btnKwadrat
+            // 
+            this.btnKwadrat.Location = new System.Drawing.Point(250, 180);
+            this.btnKwadrat.Name = "btnKwadrat";
+            this.btnKwadrat.Size = new System.Drawing.Size(56, 42);
+            this.btnKwadrat.TabIndex = 24;
+            this.btnKwadrat.Text = "x^2";
+            this.btnKwadrat.UseVisualStyleBackColor = true;
+            this.btnKwadrat.Click += new System.EventHandler(this.AllBtnClick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(249, 323);
+            this.ClientSize = new System.Drawing.Size(321, 323);
+            this.Controls.Add(this.btnKwadrat);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPierwiastek);
             this.Controls.Add(this.txtBoxEkranMaly);
             this.Controls.Add(this.txtBoxEkranGlowny);
             this.Controls.Add(this.btnDziel);
@@ -336,6 +372,9 @@
         private System.Windows.Forms.Button btnCE;
         private System.Windows.Forms.TextBox txtBoxEkranGlowny;
         private System.Windows.Forms.TextBox txtBoxEkranMaly;
+        private System.Windows.Forms.Button btnPierwiastek;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnKwadrat;
     }
 }
 

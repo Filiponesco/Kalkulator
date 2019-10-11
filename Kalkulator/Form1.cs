@@ -23,6 +23,7 @@ namespace Kalkulator
         public static double answer = 0;
 
         public Boolean dzielPrzezZero = false;
+        public Boolean moduloPrzezZero = false;
 
 
         private void AllBtnClick(object sender, EventArgs e)
@@ -30,6 +31,7 @@ namespace Kalkulator
             Button btn = sender as Button;
             ChangeEnabledBtn(true);
             dzielPrzezZero = false;
+            moduloPrzezZero = false;
             switch (btn.Name)
             {
                 case "btnDelete":
@@ -68,6 +70,26 @@ namespace Kalkulator
                             {
                                 txtBoxEkranGlowny.Text = txtBoxEkranGlowny.Text.Substring(1, txtBoxEkranGlowny.Text.Length - 1);
                             }
+                        }
+                        break;
+                    }
+                case "btnPierwiastek":
+                    {
+                        if (txtBoxEkranGlowny.Text != "0")
+                        {
+                                double wynik = Double.Parse(txtBoxEkranGlowny.Text);
+                                wynik = Math.Sqrt(wynik);
+                                txtBoxEkranGlowny.Text = wynik.ToString();
+                        }
+                        break;
+                    }
+                case "btnKwadrat":
+                    {
+                        if (txtBoxEkranGlowny.Text != "0")
+                        {
+                            double wynik = Double.Parse(txtBoxEkranGlowny.Text);
+                            wynik = Math.Pow(wynik,2);
+                            txtBoxEkranGlowny.Text = wynik.ToString();
                         }
                         break;
                     }
@@ -131,7 +153,7 @@ namespace Kalkulator
                             operation = "=";
                             multiEquations();
                             txtBoxEkranMaly.ResetText();
-                            if (!dzielPrzezZero)
+                            if (!dzielPrzezZero && !moduloPrzezZero)
                             {
                                 if(!IsMaxLength(answer.ToString()))
                                 {
@@ -148,6 +170,11 @@ namespace Kalkulator
                                 txtBoxEkranGlowny.Text = "Nie dziel przez 0";
                                 ChangeEnabledBtn(false);
                             }
+                        if (moduloPrzezZero)
+                        {
+                            txtBoxEkranGlowny.Text = "Nie moduluj przez 0";
+                            ChangeEnabledBtn(false);
+                        }
                         break;
                     }
             }
@@ -188,6 +215,22 @@ namespace Kalkulator
                         else
                         {
                             answer = Convert.ToDouble(previousEquation) / Convert.ToDouble(txtBoxEkranGlowny.Text);
+
+                            previousEquation = answer.ToString();
+                        }
+                    }
+                    break;
+                case "Mod":
+                    {
+                        previousOperation = operation;
+
+                        if (Double.Parse(txtBoxEkranGlowny.Text) == 0)
+                        {
+                            moduloPrzezZero = true;
+                        }
+                        else
+                        {
+                            answer = Convert.ToDouble(previousEquation) % Convert.ToDouble(txtBoxEkranGlowny.Text);
 
                             previousEquation = answer.ToString();
                         }
